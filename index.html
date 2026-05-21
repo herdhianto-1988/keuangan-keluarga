@@ -13,35 +13,30 @@
 
 async function kirimData() {
 
-  const data = {
-    tanggal: "2026-05-21",
-    akun: "Kas Tunai",
-    deskripsi: "Test transaksi",
-    masuk: 100000,
-    keluar: 0
-  };
+  const url =
+    "https://script.google.com/macros/s/AKfycbyExhVBuyp3FilTFDNw-B5VmkaBeiVr-_pS8yscekztGbgqXQSTK0G95MZ1ILcFSxJPlw/exec" +
+    "?action=simpan" +
+    "&tanggal=2026-05-21" +
+    "&akun=Kas Tunai" +
+    "&deskripsi=Test transaksi" +
+    "&masuk=100000" +
+    "&keluar=0";
 
   try {
 
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbyExhVBuyp3FilTFDNw-B5VmkaBeiVr-_pS8yscekztGbgqXQSTK0G95MZ1ILcFSxJPlw/exec",
-      {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    );
+    const response = await fetch(url);
 
-    alert("Transaksi berhasil dikirim");
+    const hasil = await response.json();
+
+    console.log(hasil);
+
+    alert(hasil.pesan);
 
   } catch(err) {
 
     console.log(err);
 
-    alert("Gagal mengirim transaksi");
+    alert("Gagal");
 
   }
 
